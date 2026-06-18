@@ -10,41 +10,6 @@ export const TEAMS: Team[] = [
     "flagFile": "assets/flags/ar.png"
   },
   {
-    "id": "au",
-    "de": "Australien",
-    "code": "AUS",
-    "iso2": "au",
-    "flagFile": "assets/flags/au.png"
-  },
-  {
-    "id": "eg",
-    "de": "Ägypten",
-    "code": "EGY",
-    "iso2": "eg",
-    "flagFile": "assets/flags/eg.png"
-  },
-  {
-    "id": "dz",
-    "de": "Algerien",
-    "code": "ALG",
-    "iso2": "dz",
-    "flagFile": "assets/flags/dz.png"
-  },
-  {
-    "id": "be",
-    "de": "Belgien",
-    "code": "BEL",
-    "iso2": "be",
-    "flagFile": "assets/flags/be.png"
-  },
-  {
-    "id": "ba",
-    "de": "Bosnien und Herzegowina",
-    "code": "BIH",
-    "iso2": "ba",
-    "flagFile": "assets/flags/ba.png"
-  },
-  {
     "id": "br",
     "de": "Brasilien",
     "code": "BRA",
@@ -52,32 +17,11 @@ export const TEAMS: Team[] = [
     "flagFile": "assets/flags/br.png"
   },
   {
-    "id": "cw",
-    "de": "Curaçao",
-    "code": "CUW",
-    "iso2": "cw",
-    "flagFile": "assets/flags/cw.png"
-  },
-  {
     "id": "de",
     "de": "Deutschland",
     "code": "GER",
     "iso2": "de",
     "flagFile": "assets/flags/de.png"
-  },
-  {
-    "id": "cd",
-    "de": "DR Kongo",
-    "code": "COD",
-    "iso2": "cd",
-    "flagFile": "assets/flags/cd.png"
-  },
-  {
-    "id": "ec",
-    "de": "Ecuador",
-    "code": "ECU",
-    "iso2": "ec",
-    "flagFile": "assets/flags/ec.png"
   },
   {
     "id": "ci",
@@ -108,25 +52,11 @@ export const TEAMS: Team[] = [
     "flagFile": "assets/flags/gh.png"
   },
   {
-    "id": "ht",
-    "de": "Haiti",
-    "code": "HAI",
-    "iso2": "ht",
-    "flagFile": "assets/flags/ht.png"
-  },
-  {
-    "id": "iq",
-    "de": "Irak",
-    "code": "IRQ",
-    "iso2": "iq",
-    "flagFile": "assets/flags/iq.png"
-  },
-  {
-    "id": "ir",
-    "de": "Iran",
-    "code": "IRN",
-    "iso2": "ir",
-    "flagFile": "assets/flags/ir.png"
+    "id": "nl",
+    "de": "Holland",
+    "code": "NED",
+    "iso2": "nl",
+    "flagFile": "assets/flags/nl.png"
   },
   {
     "id": "jp",
@@ -136,74 +66,11 @@ export const TEAMS: Team[] = [
     "flagFile": "assets/flags/jp.png"
   },
   {
-    "id": "jo",
-    "de": "Jordanien",
-    "code": "JOR",
-    "iso2": "jo",
-    "flagFile": "assets/flags/jo.png"
-  },
-  {
-    "id": "ca",
-    "de": "Kanada",
-    "code": "CAN",
-    "iso2": "ca",
-    "flagFile": "assets/flags/ca.png"
-  },
-  {
-    "id": "cv",
-    "de": "Kap Verde",
-    "code": "CPV",
-    "iso2": "cv",
-    "flagFile": "assets/flags/cv.png"
-  },
-  {
-    "id": "qa",
-    "de": "Katar",
-    "code": "QAT",
-    "iso2": "qa",
-    "flagFile": "assets/flags/qa.png"
-  },
-  {
-    "id": "co",
-    "de": "Kolumbien",
-    "code": "COL",
-    "iso2": "co",
-    "flagFile": "assets/flags/co.png"
-  },
-  {
-    "id": "hr",
-    "de": "Kroatien",
-    "code": "CRO",
-    "iso2": "hr",
-    "flagFile": "assets/flags/hr.png"
-  },
-  {
     "id": "ma",
     "de": "Marokko",
     "code": "MAR",
     "iso2": "ma",
     "flagFile": "assets/flags/ma.png"
-  },
-  {
-    "id": "mx",
-    "de": "Mexiko",
-    "code": "MEX",
-    "iso2": "mx",
-    "flagFile": "assets/flags/mx.png"
-  },
-  {
-    "id": "nz",
-    "de": "Neuseeland",
-    "code": "NZL",
-    "iso2": "nz",
-    "flagFile": "assets/flags/nz.png"
-  },
-  {
-    "id": "nl",
-    "de": "Niederlande",
-    "code": "NED",
-    "iso2": "nl",
-    "flagFile": "assets/flags/nl.png"
   },
   {
     "id": "no",
@@ -220,39 +87,11 @@ export const TEAMS: Team[] = [
     "flagFile": "assets/flags/at.png"
   },
   {
-    "id": "pa",
-    "de": "Panama",
-    "code": "PAN",
-    "iso2": "pa",
-    "flagFile": "assets/flags/pa.png"
-  },
-  {
-    "id": "py",
-    "de": "Paraguay",
-    "code": "PAR",
-    "iso2": "py",
-    "flagFile": "assets/flags/py.png"
-  },
-  {
     "id": "pt",
     "de": "Portugal",
     "code": "POR",
     "iso2": "pt",
     "flagFile": "assets/flags/pt.png"
-  },
-  {
-    "id": "sa",
-    "de": "Saudi-Arabien",
-    "code": "KSA",
-    "iso2": "sa",
-    "flagFile": "assets/flags/sa.png"
-  },
-  {
-    "id": "gb-sct",
-    "de": "Schottland",
-    "code": "SCO",
-    "iso2": "gb-sct",
-    "flagFile": "assets/flags/gb-sct.png"
   },
   {
     "id": "se",
@@ -269,25 +108,11 @@ export const TEAMS: Team[] = [
     "flagFile": "assets/flags/ch.png"
   },
   {
-    "id": "sn",
-    "de": "Senegal",
-    "code": "SEN",
-    "iso2": "sn",
-    "flagFile": "assets/flags/sn.png"
-  },
-  {
     "id": "es",
     "de": "Spanien",
     "code": "ESP",
     "iso2": "es",
     "flagFile": "assets/flags/es.png"
-  },
-  {
-    "id": "za",
-    "de": "Südafrika",
-    "code": "RSA",
-    "iso2": "za",
-    "flagFile": "assets/flags/za.png"
   },
   {
     "id": "kr",
@@ -297,20 +122,6 @@ export const TEAMS: Team[] = [
     "flagFile": "assets/flags/kr.png"
   },
   {
-    "id": "cz",
-    "de": "Tschechien",
-    "code": "CZE",
-    "iso2": "cz",
-    "flagFile": "assets/flags/cz.png"
-  },
-  {
-    "id": "tn",
-    "de": "Tunesien",
-    "code": "TUN",
-    "iso2": "tn",
-    "flagFile": "assets/flags/tn.png"
-  },
-  {
     "id": "tr",
     "de": "Türkei",
     "code": "TUR",
@@ -318,24 +129,10 @@ export const TEAMS: Team[] = [
     "flagFile": "assets/flags/tr.png"
   },
   {
-    "id": "uy",
-    "de": "Uruguay",
-    "code": "URU",
-    "iso2": "uy",
-    "flagFile": "assets/flags/uy.png"
-  },
-  {
     "id": "us",
     "de": "USA",
     "code": "USA",
     "iso2": "us",
     "flagFile": "assets/flags/us.png"
-  },
-  {
-    "id": "uz",
-    "de": "Usbekistan",
-    "code": "UZB",
-    "iso2": "uz",
-    "flagFile": "assets/flags/uz.png"
   }
 ];

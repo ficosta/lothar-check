@@ -1,7 +1,7 @@
 # Der Lothar-Check — Interactive Board
 
 A touch-driven, **offline** board for a presenter to use live on an iPad. A scrollable
-list of the 48 FIFA World Cup 2026 nations (German names) sits on the right; drag a nation
+fixed list of World Cup 2026 nations (German names) sits on the right; drag a nation
 onto the board and it becomes a circular flag + FIFA-trigramme token that can be moved,
 removed (drag it back onto the list), or cleared with **Reset**.
 
@@ -39,7 +39,7 @@ Assets are produced once (network required, dev machine only) by:
 npm run export      # python3 scripts/export_assets.py
 ```
 
-It renders `background.png` from `Lothar_Flags_v03.psd`, downloads the 48 flags
+It renders `background.png` from `Lothar_Flags_v03.psd`, downloads the flags
 (insyde.one; England/Scotland via flagcdn), copies the Gotham fonts, and writes the team
 data. Prerequisites:
 

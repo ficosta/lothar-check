@@ -91,7 +91,7 @@ html, body {
 .token-code {
   color: #fff;
   font-weight: 900;
-  font-size: 34px;
+  font-size: 44px;
   letter-spacing: 1px;
   pointer-events: none; /* keep the whole token as the single drag target */
 }

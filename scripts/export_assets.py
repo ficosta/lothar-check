@@ -24,24 +24,28 @@ FLAGS = os.path.join(ASSETS, "flags")
 FONTS = os.path.join(ASSETS, "fonts")
 GEN = os.path.join(ROOT, "src", "generated")
 
-# (German name, id, FIFA code). id == iso2 except England/Scotland.
+# (German name, id, FIFA code). id == iso2 except England (gb-eng).
+# This is the fixed source list shown on the right (order preserved).
 TEAMS = [
-    ("Argentinien", "ar", "ARG"), ("Australien", "au", "AUS"), ("Ägypten", "eg", "EGY"),
-    ("Algerien", "dz", "ALG"), ("Belgien", "be", "BEL"), ("Bosnien und Herzegowina", "ba", "BIH"),
-    ("Brasilien", "br", "BRA"), ("Curaçao", "cw", "CUW"), ("Deutschland", "de", "GER"),
-    ("DR Kongo", "cd", "COD"), ("Ecuador", "ec", "ECU"), ("Elfenbeinküste", "ci", "CIV"),
-    ("England", "gb-eng", "ENG"), ("Frankreich", "fr", "FRA"), ("Ghana", "gh", "GHA"),
-    ("Haiti", "ht", "HAI"), ("Irak", "iq", "IRQ"), ("Iran", "ir", "IRN"),
-    ("Japan", "jp", "JPN"), ("Jordanien", "jo", "JOR"), ("Kanada", "ca", "CAN"),
-    ("Kap Verde", "cv", "CPV"), ("Katar", "qa", "QAT"), ("Kolumbien", "co", "COL"),
-    ("Kroatien", "hr", "CRO"), ("Marokko", "ma", "MAR"), ("Mexiko", "mx", "MEX"),
-    ("Neuseeland", "nz", "NZL"), ("Niederlande", "nl", "NED"), ("Norwegen", "no", "NOR"),
-    ("Österreich", "at", "AUT"), ("Panama", "pa", "PAN"), ("Paraguay", "py", "PAR"),
-    ("Portugal", "pt", "POR"), ("Saudi-Arabien", "sa", "KSA"), ("Schottland", "gb-sct", "SCO"),
-    ("Schweden", "se", "SWE"), ("Schweiz", "ch", "SUI"), ("Senegal", "sn", "SEN"),
-    ("Spanien", "es", "ESP"), ("Südafrika", "za", "RSA"), ("Südkorea", "kr", "KOR"),
-    ("Tschechien", "cz", "CZE"), ("Tunesien", "tn", "TUN"), ("Türkei", "tr", "TUR"),
-    ("Uruguay", "uy", "URU"), ("USA", "us", "USA"), ("Usbekistan", "uz", "UZB"),
+    ("Argentinien", "ar", "ARG"),
+    ("Brasilien", "br", "BRA"),
+    ("Deutschland", "de", "GER"),
+    ("Elfenbeinküste", "ci", "CIV"),
+    ("England", "gb-eng", "ENG"),
+    ("Frankreich", "fr", "FRA"),
+    ("Ghana", "gh", "GHA"),
+    ("Holland", "nl", "NED"),
+    ("Japan", "jp", "JPN"),
+    ("Marokko", "ma", "MAR"),
+    ("Norwegen", "no", "NOR"),
+    ("Österreich", "at", "AUT"),
+    ("Portugal", "pt", "POR"),
+    ("Schweden", "se", "SWE"),
+    ("Schweiz", "ch", "SUI"),
+    ("Spanien", "es", "ESP"),
+    ("Südkorea", "kr", "KOR"),
+    ("Türkei", "tr", "TUR"),
+    ("USA", "us", "USA"),
 ]
 
 # IDs not on the insyde country endpoint -> flagcdn fallback.
