@@ -57,7 +57,7 @@ html, body {
   font-size: 26px;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  touch-action: none; /* dragging a row must not scroll the page */
+  touch-action: pan-y; /* vertical swipe scrolls the list; horizontal swipe starts a drag */
 }
 .list-row:nth-child(odd)  { background: #09302e; }
 .list-row:nth-child(even) { background: #0f3a36; }
