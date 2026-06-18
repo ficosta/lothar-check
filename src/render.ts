@@ -26,6 +26,7 @@ export function renderTokens(board: HTMLElement, placed: Placed[], byId: Map<str
     img.className = 'token-flag';
     img.src = team.flagFile;
     img.alt = team.de;
+    img.draggable = false; // stop the browser's native image-drag from hijacking the pointer drag
 
     const code = document.createElement('span');
     code.className = 'token-code';

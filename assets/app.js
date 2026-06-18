@@ -395,6 +395,7 @@
       img.className = "token-flag";
       img.src = team.flagFile;
       img.alt = team.de;
+      img.draggable = false;
       const code = document.createElement("span");
       code.className = "token-code";
       code.textContent = team.code;

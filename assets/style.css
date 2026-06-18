@@ -52,15 +52,15 @@ html, body {
   display: flex;
   align-items: center;
   padding: 0 14px;
-  color: #fff;
+  color: #09302e;
+  background: #ffffff;
+  border-bottom: 3px solid #0f2f25;
   font-weight: 700;
   font-size: 26px;
   letter-spacing: 0.5px;
   text-transform: uppercase;
   touch-action: pan-y; /* vertical swipe scrolls the list; horizontal swipe starts a drag */
 }
-.list-row:nth-child(odd)  { background: #09302e; }
-.list-row:nth-child(even) { background: #0f3a36; }
 
 /* Free-placement board surface */
 #board {
@@ -84,12 +84,16 @@ html, body {
   border-radius: 50%;
   object-fit: cover;
   box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
+  -webkit-user-drag: none; /* no native image drag (WebKit/Safari) */
+  user-select: none;
+  pointer-events: none; /* pointer events land on the .token, not the image */
 }
 .token-code {
   color: #fff;
   font-weight: 900;
   font-size: 34px;
   letter-spacing: 1px;
+  pointer-events: none; /* keep the whole token as the single drag target */
 }
 
 /* Floating element that follows the finger while dragging */
