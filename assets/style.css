@@ -1,0 +1,116 @@
+@font-face {
+  font-family: 'Gotham Cond';
+  src: url('fonts/GothamCond-Bold.otf') format('opentype');
+  font-weight: 700;
+}
+@font-face {
+  font-family: 'Gotham Cond';
+  src: url('fonts/GothamCond-Black.otf') format('opentype');
+  font-weight: 900;
+}
+
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  height: 100%;
+  background: #0a1f18;
+  overflow: hidden;
+  font-family: 'Gotham Cond', sans-serif;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#stage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2360px;
+  height: 1640px;
+  transform-origin: 0 0;
+}
+
+#bg {
+  position: absolute;
+  inset: 0;
+  width: 2360px;
+  height: 1640px;
+  pointer-events: none;
+}
+
+/* Source list — rebuilt over the PSD's empty Countries panel */
+#list {
+  position: absolute;
+  left: 1973px;
+  top: 283px;
+  width: 303px;
+  height: 1092px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.list-row {
+  height: 57px;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 26px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  touch-action: none; /* dragging a row must not scroll the page */
+}
+.list-row:nth-child(odd)  { background: #09302e; }
+.list-row:nth-child(even) { background: #0f3a36; }
+
+/* Free-placement board surface */
+#board {
+  position: absolute;
+  inset: 0;
+}
+.token {
+  position: absolute;
+  transform: translate(-50%, -50%); /* left/top is the token center */
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  touch-action: none;
+}
+.token-flag {
+  width: 79px;
+  height: 79px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
+}
+.token-code {
+  color: #fff;
+  font-weight: 900;
+  font-size: 34px;
+  letter-spacing: 1px;
+}
+
+/* Floating element that follows the finger while dragging */
+.drag-ghost {
+  position: fixed;
+  z-index: 1000;
+  pointer-events: none;
+  opacity: 0.9;
+  transform: translate(-50%, -50%);
+}
+
+#reset {
+  position: absolute;
+  left: 1973px;
+  top: 1395px;
+  width: 303px;
+  height: 70px;
+  border: none;
+  border-radius: 8px;
+  background: #c8102e;
+  color: #fff;
+  font-family: inherit;
+  font-weight: 900;
+  font-size: 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
