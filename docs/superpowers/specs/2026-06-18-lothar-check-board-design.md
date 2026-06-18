@@ -1,0 +1,150 @@
+# Der Lothar-Check — Interactive Presenter Board (iPad)
+
+**Date:** 2026-06-18
+**Status:** Approved design — ready for implementation plan
+
+## 1. Purpose
+
+An interactive board a TV presenter operates live on an **iPad (landscape, Safari)** for
+the BILD "Der Lothar-Check" segment. A scrollable list of the 48 FIFA World Cup 2026
+nations (German names) sits on the right. The presenter drags a nation onto the board;
+it becomes a circular flag + 3-letter code token that can be freely positioned, moved,
+or removed. The visual design follows the supplied `Lothar_Flags_v03.psd`.
+
+## 2. Success Criteria
+
+- Opens offline from a copied folder (`index.html`) in iPad Safari — no server, no network on-air.
+- Touch drag works reliably on iPad: drag a team from the list → drops exactly where released.
+- Placed tokens can be repositioned, removed (returned to the list), and cleared (reset).
+- Board visually matches the PSD (background, panels, red arrow, title, BILD logo, fonts, colors).
+- Board state survives an accidental Safari reload mid-show.
+
+## 3. Delivery & Runtime
+
+- **Local folder + assets** (user choice). Structure:
+  ```
+  index.html
+  app.js                 # TypeScript compiled + bundled, committed
+  assets/
+    background.png       # baked board backdrop (PSD, see §5)
+    flags/<iso2>.png     # 48 circular-source flag PNGs (square, downloaded once)
+    fonts/*.otf          # Gotham family (from /Users/iasi/Documents/Gotham 3.202)
+    teams.json           # generated team data (see §7)
+  ```
+- TypeScript (strict) is compiled at build time to a single committed `app.js`. The presenter
+  never runs a build — they copy the folder and open `index.html`. No runtime dependencies, no CDN calls.
+- **Fixed 2360×1640 stage** (PSD canvas size). All layout math is in PSD pixels. The stage is
+  centered and scaled to the viewport with CSS `transform: scale()` preserving aspect ratio,
+  so it fills any landscape iPad without per-device coordinate math.
+
+## 4. Architecture & Components
+
+Small, focused, testable modules. Pure logic is separated from DOM/pointer wiring.
+
+- **`state.ts`** — immutable `BoardState` and pure transition functions. No DOM.
+  ```
+  type Placed = { teamId: string; x: number; y: number };   // x,y in stage px (token center)
+  type BoardState = { available: string[]; placed: Placed[] };
+  ```
+  Functions (each returns a NEW state, never mutates — per coding-style rule):
+  `placeTeam(state, teamId, x, y)`, `moveTeam(state, teamId, x, y)`,
+  `removeTeam(state, teamId)`, `resetBoard(state, allTeamIds)`.
+- **`teams.ts`** — loads `teams.json`; lookup by id; ordered list for the source panel.
+- **`geometry.ts`** — pure helpers: viewport→stage coordinate transform, and `isOverList(x,y)`
+  hit-test (is a release point over the source-list panel → remove vs. place/move).
+- **`render.ts`** — renders source list + placed tokens from `BoardState` (thin, declarative).
+- **`drag.ts`** — Pointer Events controller (see §6); calls state transitions, triggers re-render.
+- **`persist.ts`** — serialize/restore `BoardState` to `localStorage` (key `lothar-board-v1`).
+- **`main.ts`** — bootstraps: load teams, restore state, wire drag + reset button.
+
+### Data flow
+`pointerdown` on list item or token → `drag.ts` tracks a ghost element → `pointerup`:
+`geometry.isOverList()` decides **place/move** (on board) vs **remove** (over list) →
+call pure transition in `state.ts` → `persist.ts` saves → `render.ts` repaints.
+
+## 5. Assets — export from PSD (`scripts/export_assets.py`, committed)
+
+Uses `psd_tools` (already installed). One-time, reproducible.
+
+- **`background.png`** — full 2360×1640 composite with the **Flags** group and **Countries**
+  group hidden (toggle `layer.visible` then re-composite). Includes: BG, both empty panels,
+  the red down-arrow, title "DER LOTHAR-CHECK", BILD logo. This is the static backdrop.
+- The PSD `Flags` group is **not** used for flag art (flags come from the CDN, §7). It is only
+  used as a fallback flag source if a CDN download fails (e.g. it contains an England flag).
+- **Fonts**: copy the Gotham OTFs into `assets/fonts/` and load via `@font-face`
+  (GothamCond-Black/Bold for the title and 3-letter codes; the list uses GothamCond-Bold).
+- **Sampled colors** (for the CSS-rebuilt source list): field `#0F2F25`, list rows `#09302E`,
+  title text white `#FFFFFF`.
+
+## 6. Touch / Drag implementation
+
+- Use **Pointer Events** (`pointerdown`/`pointermove`/`pointerup` + `setPointerCapture`), NOT the
+  HTML5 drag-and-drop API (unreliable on iOS Safari).
+- `touch-action: none` on draggable elements so dragging doesn't scroll the page.
+- The source list itself scrolls vertically (48 teams exceed panel height); distinguish a
+  scroll gesture from a drag via a small movement threshold before starting a drag.
+- A dragged item follows the finger via a "ghost" element positioned with `transform: translate`.
+
+## 7. Team data (`teams.json`, generated by export script)
+
+All **48** FIFA World Cup 2026 nations. Each entry:
+`{ id, de (German name), code (FIFA trigramme), iso2, flagFile }`.
+
+- **Flags**: downloaded once into `assets/flags/<iso2>.png` from
+  `https://flags.api.insyde.one/img/c/<iso2>/square/h160.png`.
+  - **England / Scotland** are not ISO2 countries and 404 on insyde → fallback to
+    `https://flagcdn.com/w160/gb-eng.png` and `gb-sct.png` (verified 200).
+  - The script checks each HTTP status; any unexpected 404 falls back to flagcdn, then to the
+    PSD `Flags` group, and is logged. The presenter is never online at runtime.
+- **Codes**: FIFA trigramme (GER, ESP, NED, SUI, CRO, …) — user choice.
+- **German names**: verified against FIFA's German site convention during the export step.
+
+### The 48 nations (English → German, ISO2, FIFA code)
+
+| German | ISO2 | Code | German | ISO2 | Code |
+|---|---|---|---|---|---|
+| Argentinien | ar | ARG | Marokko | ma | MAR |
+| Australien | au | AUS | Mexiko | mx | MEX |
+| Ägypten | eg | EGY | Neuseeland | nz | NZL |
+| Algerien | dz | ALG | Niederlande | nl | NED |
+| Belgien | be | BEL | Norwegen | no | NOR |
+| Bosnien und Herzegowina | ba | BIH | Österreich | at | AUT |
+| Brasilien | br | BRA | Panama | pa | PAN |
+| Curaçao | cw | CUW | Paraguay | py | PAR |
+| Deutschland | de | GER | Portugal | pt | POR |
+| DR Kongo | cd | COD | Katar | qa | QAT |
+| Ecuador | ec | ECU | Saudi-Arabien | sa | KSA |
+| Elfenbeinküste | ci | CIV | Schottland | gb-sct* | SCO |
+| England | gb-eng* | ENG | Schweden | se | SWE |
+| Frankreich | fr | FRA | Schweiz | ch | SUI |
+| Ghana | gh | GHA | Senegal | sn | SEN |
+| Haiti | ht | HAI | Spanien | es | ESP |
+| Irak | iq | IRQ | Südafrika | za | RSA |
+| Iran | ir | IRN | Südkorea | kr | KOR |
+| Japan | jp | JPN | Tschechien | cz | CZE |
+| Jordanien | jo | JOR | Tunesien | tn | TUN |
+| Kanada | ca | CAN | Türkei | tr | TUR |
+| Kap Verde | cv | CPV | Uruguay | uy | URU |
+| Kolumbien | co | COL | USA | us | USA |
+| Kroatien | hr | CRO | Usbekistan | uz | UZB |
+
+\* England/Scotland use the flagcdn fallback (`gb-eng`, `gb-sct`). German names to be
+confirmed against FIFA.de during export; this table is the working set (48 total).
+
+## 8. Testing
+
+- **Unit tests** (Node test runner / tsx) for the pure modules — the bulk of correctness:
+  - `state.ts`: place removes from available + adds to placed; move updates coords only;
+    remove returns to available; reset restores all; transitions never mutate the input.
+  - `geometry.ts`: viewport↔stage transform round-trips; `isOverList` boundary cases.
+- **Asset script**: a check that `teams.json` has 48 entries and every `flagFile` exists on disk.
+- **Manual iPad checklist** (touch can't be unit-tested): drag from list → token appears under
+  finger; reposition; drag over list → removed; reset clears; reload restores; list scrolls
+  without dragging; rotate/resize keeps the stage centered.
+
+## 9. Out of scope (YAGNI)
+
+- No multi-board/tier logic — single free board (user choice).
+- No snap-to-grid — totally free placement (user choice).
+- No editing team names/flags in the UI (data is fixed in `teams.json`).
+- No backend, accounts, or network at runtime.
