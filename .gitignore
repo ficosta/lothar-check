@@ -1,1 +1,4 @@
 node_modules/
+
+# Large design source (not needed at runtime)
+Lothar_Flags_v03.psd
