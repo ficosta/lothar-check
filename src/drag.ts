@@ -16,6 +16,8 @@ type Active = {
   startY: number;
   dragging: boolean;
   pointerId: number;
+  grabOffsetX: number;
+  grabOffsetY: number;
 };
 
 export function initDrag(
@@ -35,6 +37,15 @@ export function initDrag(
     ghost.classList.add('drag-ghost');
     ghost.style.display = 'none';
     document.body.appendChild(ghost);
+    let grabOffsetX = 0;
+    let grabOffsetY = 0;
+    if (fromBoard) {
+      const rect = el.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      grabOffsetX = e.clientX - centerX;
+      grabOffsetY = e.clientY - centerY;
+    }
     active = {
       teamId: el.dataset.teamId!,
       source: fromBoard ? 'board' : 'list',
@@ -43,6 +54,8 @@ export function initDrag(
       startY: e.clientY,
       dragging: false,
       pointerId: e.pointerId,
+      grabOffsetX,
+      grabOffsetY,
     };
     stage.setPointerCapture(e.pointerId);
   }
@@ -57,8 +70,8 @@ export function initDrag(
       active.ghost.style.display = '';
       active.ghost.style.transform = `translate(-50%, -50%) scale(${getFit().scale})`;
     }
-    active.ghost.style.left = `${e.clientX}px`;
-    active.ghost.style.top = `${e.clientY}px`;
+    active.ghost.style.left = `${e.clientX - active.grabOffsetX}px`;
+    active.ghost.style.top = `${e.clientY - active.grabOffsetY}px`;
   }
 
   function onUp(e: PointerEvent): void {
@@ -68,7 +81,7 @@ export function initDrag(
     a.ghost.remove();
     try { stage.releasePointerCapture(e.pointerId); } catch { /* already released */ }
     if (!a.dragging) return; // tap or scroll, not a drag
-    const { x, y } = viewportToStage(e.clientX, e.clientY, getFit());
+    const { x, y } = viewportToStage(e.clientX - a.grabOffsetX, e.clientY - a.grabOffsetY, getFit());
     if (isOverList(x, y)) {
       if (a.source === 'board') cb.onRemove(a.teamId);
       return; // list-to-list drop is a no-op

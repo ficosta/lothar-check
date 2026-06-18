@@ -452,6 +452,15 @@
       ghost.classList.add("drag-ghost");
       ghost.style.display = "none";
       document.body.appendChild(ghost);
+      let grabOffsetX = 0;
+      let grabOffsetY = 0;
+      if (fromBoard) {
+        const rect = el.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        grabOffsetX = e.clientX - centerX;
+        grabOffsetY = e.clientY - centerY;
+      }
       active = {
         teamId: el.dataset.teamId,
         source: fromBoard ? "board" : "list",
@@ -459,7 +468,9 @@
         startX: e.clientX,
         startY: e.clientY,
         dragging: false,
-        pointerId: e.pointerId
+        pointerId: e.pointerId,
+        grabOffsetX,
+        grabOffsetY
       };
       stage2.setPointerCapture(e.pointerId);
     }
@@ -473,8 +484,8 @@
         active.ghost.style.display = "";
         active.ghost.style.transform = `translate(-50%, -50%) scale(${getFit().scale})`;
       }
-      active.ghost.style.left = `${e.clientX}px`;
-      active.ghost.style.top = `${e.clientY}px`;
+      active.ghost.style.left = `${e.clientX - active.grabOffsetX}px`;
+      active.ghost.style.top = `${e.clientY - active.grabOffsetY}px`;
     }
     function onUp(e) {
       if (!active || e.pointerId !== active.pointerId) return;
@@ -486,7 +497,7 @@
       } catch {
       }
       if (!a.dragging) return;
-      const { x, y } = viewportToStage(e.clientX, e.clientY, getFit());
+      const { x, y } = viewportToStage(e.clientX - a.grabOffsetX, e.clientY - a.grabOffsetY, getFit());
       if (isOverList(x, y)) {
         if (a.source === "board") cb.onRemove(a.teamId);
         return;

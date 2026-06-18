@@ -66,6 +66,8 @@ html, body {
 #board {
   position: absolute;
   inset: 0;
+  z-index: 2;
+  pointer-events: none;
 }
 .token {
   position: absolute;
@@ -74,6 +76,7 @@ html, body {
   align-items: center;
   gap: 14px;
   touch-action: none;
+  pointer-events: auto;
 }
 .token-flag {
   width: 79px;
