@@ -54,12 +54,12 @@ html, body {
   padding: 0 14px;
   color: #09302e;
   background: #ffffff;
-  border-bottom: 3px solid #0f2f25;
   font-weight: 700;
-  font-size: 26px;
+  font-size: 40px;
   letter-spacing: 0.5px;
   text-transform: uppercase;
   touch-action: pan-y; /* vertical swipe scrolls the list; horizontal swipe starts a drag */
+  margin-bottom: 7px;
 }
 
 /* Free-placement board surface */
