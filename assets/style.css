@@ -79,8 +79,8 @@ html, body {
   pointer-events: auto;
 }
 .token-flag {
-  width: 79px;
-  height: 79px;
+  width: 119px;
+  height: 119px;
   border-radius: 50%;
   object-fit: cover;
   box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
@@ -91,7 +91,7 @@ html, body {
 .token-code {
   color: #fff;
   font-weight: 900;
-  font-size: 44px;
+  font-size: 55px;
   letter-spacing: 1px;
   pointer-events: none; /* keep the whole token as the single drag target */
 }
