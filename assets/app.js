@@ -39,7 +39,7 @@
     },
     {
       "id": "ba",
-      "de": "Bosnien-Herzegowina",
+      "de": "Bosnien-Herzg.",
       "code": "BIH",
       "iso2": "ba",
       "flagFile": "assets/flags/ba.png"
